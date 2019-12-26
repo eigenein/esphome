@@ -1,0 +1,64 @@
+esphome:
+  name: molgan
+  platform: ESP8266
+  board: d1_mini
+
+  on_boot:
+    priority: 10
+    then:
+      - light.turn_on:
+          id: fastled
+          red: 1.0
+          green: 1.0
+          blue: 1.0
+          brightness: 0.1
+      - output.turn_on: gpio_d6
+      - output.turn_off: gpio_d8
+
+captive_portal:
+
+wifi:
+  ssid: "Plankton"
+
+ota:
+
+logger:
+  level: VERBOSE
+
+api:
+
+web_server:
+
+light:
+  - platform: fastled_clockless
+    chipset: NEOPIXEL
+    pin: D3
+    num_leds: 16
+    name: FastLED
+    id: fastled
+    gamma_correct: 2.0
+    effects:
+      - addressable_rainbow:
+          name: Rainbow
+
+output:
+  - platform: gpio
+    pin: D6
+    id: gpio_d6
+  - platform: gpio
+    pin: D8
+    id: gpio_d8
+
+dallas:
+  - pin: D7
+
+sensor:
+  - platform: dallas
+    index: 0
+    id: board_temperature
+    name: Temperature
+
+  - platform: wifi_signal
+    name: "WiFi Signal"
+    id: wifi_rssi
+    update_interval: 60s
