@@ -18,7 +18,8 @@ esphome:
 captive_portal:
 
 wifi:
-  ssid: "Plankton"
+  ap:
+    ssid: "Molgan"
 
 ota:
 
