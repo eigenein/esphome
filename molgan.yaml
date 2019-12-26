@@ -8,16 +8,16 @@ esphome:
     then:
       - light.turn_on:
           id: fastled
-          red: 1.0
-          green: 1.0
-          blue: 1.0
-          brightness: 0.1
+          effect: "Random Twinkle"
+          brightness: 1.0
       - output.turn_on: gpio_d6
       - output.turn_off: gpio_d8
 
 captive_portal:
 
 wifi:
+  ssid: !secret ssid
+  password: !secret password
   ap:
     ssid: "Molgan"
 
@@ -41,6 +41,24 @@ light:
     effects:
       - addressable_rainbow:
           name: Rainbow
+      - random:
+          name: Random
+      - strobe:
+          name: Strobe
+      - flicker:
+          name: Flicker
+      - addressable_color_wipe:
+          name: "Color Wipe"
+      - addressable_scan:
+          name: "Scan"
+      - addressable_twinkle:
+          name: "Twinkle"
+      - addressable_random_twinkle:
+          name: "Random Twinkle"
+      - addressable_fireworks:
+          name: "Fireworks"
+      - addressable_flicker:
+          name: "Addressable Flicker"
 
 output:
   - platform: gpio
